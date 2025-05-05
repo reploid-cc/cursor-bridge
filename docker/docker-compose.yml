@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  cursor-bridge:
+    build: 
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: cursor-bridge
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - API_PORT=1000
+      - N8N_HOST=host.docker.internal
+      - N8N_PORT=5678
+      - LOG_LEVEL=info
+      - BROWSER_TYPE=chrome
+    volumes:
+      - ../volumes/logs:/app/volumes/logs
+      - ../volumes/config:/app/volumes/config
+    ports:
+      - "1000:1000"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "node", "src/utils/healthcheck.js"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G
+    networks:
+      - n8n-support
+
+networks:
+  n8n-support:
+    driver: bridge 

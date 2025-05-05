@@ -43,7 +43,7 @@ Bạn có thể cấu hình cursor-bridge bằng cách chỉnh sửa file `.env`
 | Biến | Mô tả | Giá trị mặc định |
 |------|-------|------------------|
 | NODE_ENV | Môi trường triển khai | production |
-| API_PORT | Port cho API endpoint | 3000 |
+| API_PORT | Port cho API endpoint | 1000 |
 | N8N_HOST | Hostname/IP của n8n | host.docker.internal |
 | N8N_PORT | Port của n8n | 5678 |
 | LOG_LEVEL | Mức độ log | info |
